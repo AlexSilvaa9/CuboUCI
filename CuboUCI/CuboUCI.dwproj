@@ -39,6 +39,10 @@
       <Name>Medicamento.dim</Name>
       <FullPath>Medicamento.dim</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Alergia.dim</Name>
+      <FullPath>Alergia.dim</FullPath>
+    </ProjectItem>
   </Dimensions>
   <DataSources>
     <ProjectItem>

@@ -1,4 +1,4 @@
-﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="e4766b90-f199-48bd-ae33-87469b22f157" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="ae2d6350-1e85-4a89-ac48-565144a140a5" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
   <ID>Hospital</ID>
   <Name>Hospital</Name>
   <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
@@ -8,7 +8,7 @@
       <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
       <Value>
         <dds xmlns="">
-          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="8" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-4853" scrolltop="-2388" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="8615" y="11070" backcolor="2039583" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="8" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-4853" scrolltop="-2388" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="9694" y="12171" backcolor="2039583" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
             <font>
               <ddsxmlobjectstreamwrapper binary="010000009001b0300100065461686f6d61" />
             </font>
@@ -123,108 +123,91 @@
   </Annotations>
   <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
   <State>Unprocessed</State>
-  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="98e52676-65f4-42d0-94a4-eaf6b0c68c5f">
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="83ad4423-0a50-43c7-bbcc-2d4e7308a257">
     <DataSourceViewID>UCIDW</DataSourceViewID>
   </Source>
   <UnknownMember>Visible</UnknownMember>
-  <ErrorConfiguration dwd:design-time-name="d4428ad2-45c7-4cd4-9d1a-73bac79e5f16">
+  <ErrorConfiguration dwd:design-time-name="3904483c-f6d3-4b0d-b366-ad5d95d2fb2f">
     <KeyNotFound>ReportAndStop</KeyNotFound>
     <KeyDuplicate>ReportAndStop</KeyDuplicate>
     <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
   </ErrorConfiguration>
   <CurrentStorageMode>Molap</CurrentStorageMode>
   <Attributes>
-    <Attribute dwd:design-time-name="9f1c0a80-b0ff-4eda-a58f-cdebaaa6990e">
+    <Attribute dwd:design-time-name="a6cc007e-b30e-40a6-965d-56bb352cb568">
       <ID>Hospital ID</ID>
       <Name>Hospital ID</Name>
       <Usage>Key</Usage>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="01c44f38-8601-4d1c-adaa-a827c7fbaf66">
+        <KeyColumn dwd:design-time-name="ce17b8a5-0967-4f20-a356-3216b7132ced">
           <DataType>Integer</DataType>
           <NullProcessing>UnknownMember</NullProcessing>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="8986ea60-83cd-4a71-a64d-a751a013e28e">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f95f295e-0996-4d53-b8f8-27eb3579cefb">
             <TableID>dbo_Hospital</TableID>
             <ColumnID>hospitalID</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <NameColumn dwd:design-time-name="0f395bda-e282-4003-823a-65142637066b">
+      <NameColumn dwd:design-time-name="8f5eceb1-7f8e-4926-94c8-d14c8c4786db">
         <DataType>WChar</DataType>
-        <Source xsi:type="ColumnBinding" dwd:design-time-name="73774f27-27cd-4475-a5c0-d70dfcede148">
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="b632ccdb-108f-4c9f-adeb-77146acccc5f">
           <TableID>dbo_Hospital</TableID>
           <ColumnID>nombreHospital</ColumnID>
         </Source>
       </NameColumn>
       <AttributeRelationships>
-        <AttributeRelationship dwd:design-time-name="7882396d-0c92-4914-8a7f-b3f54d90420e">
+        <AttributeRelationship dwd:design-time-name="eb85255e-79de-4133-b288-592e538c87a4">
           <AttributeID>Region Id</AttributeID>
           <Name>Region Id</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="506f9a7d-717f-4370-9db6-4255b6e744b5">
-          <AttributeID>Nombre Hospital</AttributeID>
-          <Name>Nombre Hospital</Name>
-        </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="4d051073-d3b5-4bac-91b0-792afda00b65">
+        <AttributeRelationship dwd:design-time-name="6ce6eb09-dd35-4c25-a9cd-cf9791a17814">
           <AttributeID>Numero Camas Categoria</AttributeID>
           <Name>Numero Camas Categoria</Name>
         </AttributeRelationship>
-        <AttributeRelationship dwd:design-time-name="6799e036-ba21-491d-a5f8-e13c4c925123">
+        <AttributeRelationship dwd:design-time-name="8b837cb4-0786-4779-8793-076927647d31">
           <AttributeID>Nombre Region</AttributeID>
           <Name>Nombre Region</Name>
         </AttributeRelationship>
       </AttributeRelationships>
       <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="2a58d055-5d80-4c4b-9365-f61d28e16e95">
+    <Attribute dwd:design-time-name="43af8f6b-16d4-4851-a3a8-03078f2779ba">
       <ID>Region Id</ID>
       <Name>Region Id</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="360ae16c-f405-4d8e-99e6-a3b7cdecd619">
+        <KeyColumn dwd:design-time-name="4cc93ef2-40ac-41bc-adbd-8d5bd5e21dea">
           <DataType>Integer</DataType>
           <NullProcessing>UnknownMember</NullProcessing>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="e87be2ac-29eb-43a8-9376-6c3d5e68da84">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="0bd83784-7983-4a71-b499-ee1b7662dcfb">
             <TableID>dbo_Region</TableID>
             <ColumnID>regionId</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
-      <NameColumn dwd:design-time-name="39b2bcca-83d3-4736-9c9a-21291daac64c">
+      <NameColumn dwd:design-time-name="01dcc919-672d-440e-bb61-0c52d47cd6c9">
         <DataType>WChar</DataType>
         <DataSize>64</DataSize>
-        <Source xsi:type="ColumnBinding" dwd:design-time-name="305aae66-bc6f-479c-a9b6-8913069766cf">
+        <Source xsi:type="ColumnBinding" dwd:design-time-name="a75496f4-eb84-4560-8f86-d5fee920c89c">
           <TableID>dbo_Region</TableID>
           <ColumnID>nombreRegion</ColumnID>
         </Source>
       </NameColumn>
       <OrderBy>Key</OrderBy>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="c9e7d7af-48cd-48c9-9d78-1c222ffddc52">
-      <ID>Nombre Hospital</ID>
-      <Name>Nombre Hospital</Name>
-      <KeyColumns>
-        <KeyColumn dwd:design-time-name="e94a4a6d-d2fc-4b32-be70-62a6433294a2">
-          <DataType>Integer</DataType>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="f8863e2c-14c8-4a72-a371-0f379d627ad7">
-            <TableID>dbo_Hospital</TableID>
-            <ColumnID>nombreHospital</ColumnID>
-          </Source>
-        </KeyColumn>
-      </KeyColumns>
-      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
-      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
-    </Attribute>
-    <Attribute dwd:design-time-name="7a766454-cc2f-4571-9fe2-1af056c4ae19">
+    <Attribute dwd:design-time-name="5947573c-7aea-4cba-9a1e-a5a355fef88e">
       <ID>Numero Camas Categoria</ID>
       <Name>Numero Camas Categoria</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="7f74cdfc-eb38-46bc-a07e-97c4a6ce2807">
+        <KeyColumn dwd:design-time-name="c43a588c-c4f7-458e-bd8c-f31346326440">
           <DataType>WChar</DataType>
           <DataSize>255</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="38461d70-6aa3-4166-944c-e69861386728">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="f8e73c52-58ac-4dab-abf4-878655d8d7ae">
             <TableID>dbo_Hospital</TableID>
             <ColumnID>numeroCamasCategoria</ColumnID>
           </Source>
@@ -233,34 +216,35 @@
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
-    <Attribute dwd:design-time-name="9946d425-7e86-4bda-8839-2ada7e530dfe">
+    <Attribute dwd:design-time-name="1681aaab-f22b-4f2c-b046-397f6af78f7d">
       <ID>Nombre Region</ID>
       <Name>Nombre Region</Name>
       <KeyColumns>
-        <KeyColumn dwd:design-time-name="0a445a60-9d6c-4aeb-b9bd-1dc882699715">
+        <KeyColumn dwd:design-time-name="1fa19db8-cd7c-473b-b083-16c4a807630c">
           <DataType>WChar</DataType>
           <DataSize>64</DataSize>
-          <Source xsi:type="ColumnBinding" dwd:design-time-name="e1c0d185-0671-4820-8c0b-e5654fd27e4f">
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="612120f8-d07f-4c68-ac66-bb9b3ab05083">
             <TableID>dbo_Region</TableID>
             <ColumnID>nombreRegion</ColumnID>
           </Source>
         </KeyColumn>
       </KeyColumns>
+      <AttributeHierarchyVisible>false</AttributeHierarchyVisible>
       <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
       <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
     </Attribute>
   </Attributes>
   <Hierarchies>
-    <Hierarchy dwd:design-time-name="caed62ab-3a02-4c52-b9bd-991415050961">
+    <Hierarchy dwd:design-time-name="10ea0075-e893-46b7-91af-a93d559bbfa8">
       <ID>Jerarquía</ID>
       <Name>Hospital</Name>
       <Levels>
-        <Level dwd:design-time-name="a3b20cf8-5444-48e6-be79-15b17d6786bc">
+        <Level dwd:design-time-name="839138c0-694d-42a3-bc9a-1d1ead18da72">
           <ID>Region Id</ID>
           <Name>Region</Name>
           <SourceAttributeID>Region Id</SourceAttributeID>
         </Level>
-        <Level dwd:design-time-name="899f2cbe-7722-4c57-ad28-8e2dd4c339a5">
+        <Level dwd:design-time-name="b5ed86ea-bab1-4d16-a1f6-e968736d7f6f">
           <ID>Hospital ID</ID>
           <Name>Hospital</Name>
           <SourceAttributeID>Hospital ID</SourceAttributeID>
