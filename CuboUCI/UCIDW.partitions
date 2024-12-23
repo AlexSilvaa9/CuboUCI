@@ -1,17 +1,17 @@
-﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="de866e75-a97f-4d83-970a-d42c02f916f3" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="e5906f21-fefb-4306-9276-9e7c76e45520" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
   <ID>UCIDW</ID>
   <MeasureGroups>
     <MeasureGroup>
       <ID>Gasto Medicamento</ID>
       <Partitions>
-        <Partition dwd:design-time-name="8db2e2bc-cd7d-43bf-8a9c-6170683a73fb">
+        <Partition dwd:design-time-name="94b1b2b4-1eb6-4b07-95b1-57fb821e7fe9">
           <ID>Gasto Medicamento</ID>
           <Name>Gasto Medicamento</Name>
           <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
           <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
           <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
           <State>Unprocessed</State>
-          <Source xsi:type="DsvTableBinding" dwd:design-time-name="4e26285e-4307-4d19-9ab0-bc628100963f">
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="55868a01-46e8-4834-9b90-2391cb5c4063">
             <DataSourceViewID>UCIDW</DataSourceViewID>
             <TableID>dbo_GastoMedicamento</TableID>
           </Source>
@@ -24,14 +24,14 @@
     <MeasureGroup>
       <ID>Relation 10</ID>
       <Partitions>
-        <Partition dwd:design-time-name="b75b1e12-bc35-44c5-908e-e67be7210e20">
+        <Partition dwd:design-time-name="601fb619-dbd0-4428-acd8-a4048942fceb">
           <ID>Relation 10</ID>
           <Name>Relation 10</Name>
           <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
           <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
           <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
           <State>Unprocessed</State>
-          <Source xsi:type="DsvTableBinding" dwd:design-time-name="9911a961-6743-4847-8ef2-c8ccba5b2c58">
+          <Source xsi:type="DsvTableBinding" dwd:design-time-name="263da829-ca3d-4365-9078-66bb05184822">
             <DataSourceViewID>UCIDW</DataSourceViewID>
             <TableID>dbo_Relation_10</TableID>
           </Source>

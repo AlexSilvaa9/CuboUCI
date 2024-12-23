@@ -40,8 +40,8 @@
       <FullPath>Medicamento.dim</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Alergia.dim</Name>
-      <FullPath>Alergia.dim</FullPath>
+      <Name>Alergia 1.dim</Name>
+      <FullPath>Alergia 1.dim</FullPath>
     </ProjectItem>
   </Dimensions>
   <DataSources>
