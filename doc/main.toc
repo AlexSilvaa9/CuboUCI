@@ -2,21 +2,29 @@
 \contentsline {section}{\numberline {1}Introducción}{2}{}%
 \contentsline {section}{\numberline {2}Objetivos}{2}{}%
 \contentsline {section}{\numberline {3}Creación del Cubo Multidimensional}{2}{}%
-\contentsline {subsection}{\numberline {3.1}Creacion de proyecto}{2}{}%
-\contentsline {subsection}{\numberline {3.2}Origen de datos}{2}{}%
-\contentsline {subsection}{\numberline {3.3}Dimensiones}{2}{}%
-\contentsline {section}{\numberline {4}Consultas MDX}{2}{}%
-\contentsline {subsection}{\numberline {4.1}Consulta 1}{2}{}%
-\contentsline {subsection}{\numberline {4.2}Consulta 2}{3}{}%
-\contentsline {subsection}{\numberline {4.3}Consulta 3}{3}{}%
-\contentsline {subsection}{\numberline {4.4}Consulta 4}{3}{}%
-\contentsline {subsection}{\numberline {4.5}Consulta 5}{3}{}%
-\contentsline {subsection}{\numberline {4.6}Consulta 6}{3}{}%
-\contentsline {subsection}{\numberline {4.7}Consulta 7}{3}{}%
-\contentsline {subsection}{\numberline {4.8}Consulta 8}{3}{}%
-\contentsline {subsection}{\numberline {4.9}Consulta 9}{4}{}%
-\contentsline {subsection}{\numberline {4.10}Consulta 10}{4}{}%
-\contentsline {section}{\numberline {5}Tutorial ejecutar consultas}{4}{}%
-\contentsline {section}{\numberline {6}Dificultades Encontradas}{4}{}%
-\contentsline {section}{\numberline {7}Conclusión}{4}{}%
-\contentsline {section}{\numberline {8}Acceso al Repositorio}{5}{}%
+\contentsline {subsection}{\numberline {3.1}Pasos Iniciales}{2}{}%
+\contentsline {subsection}{\numberline {3.2}Creación del Origen de Datos}{3}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}Configuración de la Conexión}{4}{}%
+\contentsline {subsection}{\numberline {3.3}Creación de la Vista de Origen de Datos}{4}{}%
+\contentsline {subsection}{\numberline {3.4}Creación del Cubo}{6}{}%
+\contentsline {subsection}{\numberline {3.5}Relaciones y Dimensiones}{8}{}%
+\contentsline {subsection}{\numberline {3.6}Cálculo de Medidas}{10}{}%
+\contentsline {subsection}{\numberline {3.7}Jerarquías y Atributos}{10}{}%
+\contentsline {subsection}{\numberline {3.8}Procesamiento del Cubo}{14}{}%
+\contentsline {subsection}{\numberline {3.9}Conexión al Cubo Procesado}{15}{}%
+\contentsline {subsection}{\numberline {3.10}Verificación de Jerarquías}{15}{}%
+\contentsline {section}{\numberline {4}Consultas MDX}{16}{}%
+\contentsline {subsection}{\numberline {4.1}Consulta 1}{16}{}%
+\contentsline {subsection}{\numberline {4.2}Consulta 2}{16}{}%
+\contentsline {subsection}{\numberline {4.3}Consulta 3}{17}{}%
+\contentsline {subsection}{\numberline {4.4}Consulta 4}{17}{}%
+\contentsline {subsection}{\numberline {4.5}Consulta 5}{17}{}%
+\contentsline {subsection}{\numberline {4.6}Consulta 6}{17}{}%
+\contentsline {subsection}{\numberline {4.7}Consulta 7}{17}{}%
+\contentsline {subsection}{\numberline {4.8}Consulta 8}{17}{}%
+\contentsline {subsection}{\numberline {4.9}Consulta 9}{17}{}%
+\contentsline {subsection}{\numberline {4.10}Consulta 10}{18}{}%
+\contentsline {section}{\numberline {5}Tutorial ejecutar consultas}{18}{}%
+\contentsline {section}{\numberline {6}Dificultades Encontradas}{18}{}%
+\contentsline {section}{\numberline {7}Conclusión}{18}{}%
+\contentsline {section}{\numberline {8}Acceso al Repositorio}{19}{}%

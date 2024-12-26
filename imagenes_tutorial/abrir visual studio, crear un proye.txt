@@ -4,10 +4,26 @@ nueva vista de origen de datos, seleccionamos nuestro origen de datos (imagen), 
 
 creamos el cubo usando tablas existentes(imagen).
 seleccionamos las tablas de grupo de medida que van a ser nuestro hecho gasto de medicamento y los grupos de mediidas intermedios que son las relaciones intermedias de las relaciones NM(imagen). se seleccionan las medidad(imagen) y las dimensiones del cubo(imagen). podemos ver el cubo (imagen).
+
+
+
+
 nos metemos en uso de dimensiones y ponemos una relacion de gasto a gasto de tipo hacho(imagen), relaciones de las dimensiones mn con la tabla/hecho intermecio (2 imagenes) y para cada una de estas dimensiones nm que son alergia y tratamiento  una relacion varios a varios con gasto de medicamento(2 imagenes)
+
+
+
+
+
  no olvidemos que algunas medidas como tasa de infusion tienen que calcularse por la media
+
+
+
+
+
 Lo que nos queda es crear las jerarquias, ya esta el cubo con sus relaciones.
 por cada tabla o tablas de una jerarquia se organiza la gerarquia con los ids de cada tabla, a los que se le pondra nameColumn identificable, tambien pondremos los atributos que no entren en la gerarquia. 
+
+
 
 paciente se pone el pid en la gerarquia y se le cambia de nombre a paciente y se añaden los atributos genero y etnia(imagen)
 
@@ -22,6 +38,11 @@ medicamento será también muy simple ya que solo tendrá id y nombre que ira en
 alergia tendrá solo unh id que tendrá de nameCOlu,m a nombre de alergia, tendrá los atributos nombre de alergia tipo de alergia y nombre medicamento en caso de que la alergia sea debida a un medicamento(imagen)
 
 la ultima dimensión será tratamiento , quer tendremos que crear una gerarquia con el id de tratamiento y descripción del tratamiento que es lo que pondremos en el nameColumn del id(imagen)
+
+
+
+
+
 
 por ultimo click derecho en el cubo, procesar( se implementará el proyecto y se cargara todo en la estructura del cubo
 para debuguear es buena idea hacer que el cubo se procese de pforma secuencial y con transacciones independientes para que sepa donde ffalla. si no hay ningún error veremos esta imagen(imagen)

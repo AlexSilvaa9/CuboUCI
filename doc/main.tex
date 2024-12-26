@@ -102,12 +102,296 @@ El objetivo principal de este trabajo es diseñar, implementar y explotar un cub
 
 \end{itemize}
 
-	\section{Creación del Cubo Multidimensional}
-	  - Una sección que describa, a modo de tutorial, el proceso para la creación del cubo de vuestro proyecto. 
 
-	\subsection{Creacion de proyecto}
-	\subsection{Origen de datos}
-	\subsection{Dimensiones}
+
+
+
+
+
+
+
+
+\section{Creación del Cubo Multidimensional}
+En esta sección se explicará el proceso de creación del cubo multidimensional a partir del almacén de datos cargado, de manera detallada.
+
+\subsection{Pasos Iniciales}
+Para comenzar con el proyecto, abre Visual Studio y crea un nuevo proyecto de tipo \textbf{Proyecto Multidimensional de Analysis Services}, como se muestra en la figura \ref{fig:plantilla}.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=\textwidth]{images/plantilla.png}
+		\caption{Creación de un nuevo proyecto multidimensional en Visual Studio.}
+		\label{fig:plantilla}
+	\end{center}
+\end{figure}
+
+\subsection{Creación del Origen de Datos}
+El siguiente paso consiste en crear un nuevo \textbf{Origen de Datos}. Para ello, selecciona la opción de crear una nueva conexión, como se muestra en la figura \ref{fig:conexion}. Posteriormente, configura la conexión con \textbf{Autenticación SQL Server}, utilizando una cuenta de servicio.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/conexion.png}
+		\caption{Nueva conexión en Visual Studio.}
+		\label{fig:conexion}
+	\end{center}
+\end{figure}
+
+\subsubsection{Configuración de la Conexión}
+A continuación, selecciona \textbf{Autenticación SQL Server} y utiliza la cuenta de servicio para configurar la conexión a la base de datos.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{images/conexion_bd.png}
+	\caption{Configuración de la autenticación SQL Server.}
+	\label{fig:conexion2}
+\end{figure}
+
+\subsection{Creación de la Vista de Origen de Datos}
+Una vez configurada la conexión, creamos una nueva vista de origen de datos. Para ello, seleccionamos el origen de datos previamente configurado, tal como se muestra en la figura \ref{fig:origen}.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/vista1.png} 
+		\caption{Selección del origen de datos configurado previamente.}
+		\label{fig:origen}
+	\end{center}
+\end{figure}
+
+A continuación, seleccionamos las tablas necesarias del origen de datos.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/vista_tablas.png}
+		\caption{Selección de tablas del origen de datos.}
+		\label{fig:origen2}
+	\end{center}
+\end{figure}
+
+Verifica la vista de la base de datos para asegurarte de que todas las tablas estén correctamente configuradas.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.9\textwidth]{images/vista_imagen.png}
+		\caption{Verificación de la vista de la base de datos.}
+		\label{fig:origen3}
+	\end{center}
+\end{figure}
+
+\subsection{Creación del Cubo}
+Una vez configuradas las tablas, procede a crear el cubo multidimensional utilizando las tablas seleccionadas. En la figura \ref{fig:cubo1} se muestra el proceso de creación del cubo.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/cubo1.png} 
+		\caption{Creación del cubo multidimensional con las tablas seleccionadas.}
+		\label{fig:cubo1}
+	\end{center}
+\end{figure}
+
+En este paso, seleccionamos las tablas del grupo de medida, como el \textbf{Gasto de Medicamento}, y los grupos de medida intermedios para las relaciones de tipo NM, como se muestra en la figura \ref{fig:cubo_medidas}.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/cubo_medidas.png} 
+		\caption{Selección de tablas del grupo de medida y relaciones intermedias.}
+		\label{fig:cubo_medidas}
+	\end{center}
+\end{figure}
+
+Luego, seleccionamos las medidas y dimensiones del cubo, como se puede ver en la figura \ref{fig:dimensiones} y \ref{fig:medidas}.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/medidas2.png} 
+		\caption{Configuración de medidas.}
+		\label{fig:medidas}
+	\end{center}
+\end{figure}
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/dimensiones.png} 
+		\caption{Configuración dimensiones en el cubo.}
+		\label{fig:dimensiones}
+	\end{center}
+\end{figure}
+
+Finalmente, visualizamos el cubo creado en la figura \ref{fig:cubo_vista}.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.9\textwidth]{images/cubo_vista.png} 
+		\caption{Visualización del cubo.}
+		\label{fig:cubo_vista}
+	\end{center}
+\end{figure}
+\subsection{Relaciones y Dimensiones}
+Para configurar las relaciones, vamos a \textbf{Uso de Dimensiones}, donde definimos las relaciones entre el \textbf{Gasto} y el \textbf{Gasto}  de tipo Hecho, así como las relaciones entre las dimensiones NM y los grupos de medidas intermedio. La figura \ref{fig:uso_hecho} muestra este proceso.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/uso_hecho.png} 
+		\caption{Relacion entre dimension Gasto y grupo de medidas Gasto de tipo Hecho}
+		\label{fig:uso_hecho}
+	\end{center}
+\end{figure}
+
+Además, configuramos relaciones de tipo \textbf{Varios a Varios} para dimensiones como \textbf{Alergia} y \textbf{Tratamiento}, con \textbf{Gasto de Medicamento}, como se muestra en las figuras \ref{fig:relation10} y \ref{fig:relation11}.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/relation10.png}
+		\caption{Configuración de relaciones de tipo Varios a Varios para Alergia.}
+		\label{fig:relation10}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/relation11.png}
+		\caption{Configuración de relaciones de tipo Varios a Varios para Tratamiento.}
+		\label{fig:relation11}
+	\end{center}
+\end{figure}
+
+Al final de este proceso el esquema de uso de dimensiones quedará como en la figura \ref{fig:uso_dim}, donde las dimensiones alergia y tratamiento se relacionan con el gasto de medicamento de tipo varios a varios, pero para lograr esto las tablas intermedias(grupos de medidas intermedios) se tienen que relacionar con su dimension y el gasto.
+
+\begin{figure}[H]
+	\begin{center} 
+		\includegraphics[width=.7\textwidth]{images/usoDimensiones.png} 
+		\caption{Relaciones de dimensiones y grupos de medida del cubo.}
+		\label{fig:uso_dim}
+	\end{center}
+\end{figure}
+\subsection{Cálculo de Medidas}
+La medida \textbf{Tasa de Infusión}, se deben calcular utilizando la media, el resto de medidas (cantidad, recuento de gasto y volumen de fluido) son aditivas.
+
+\subsection{Jerarquías y Atributos}
+Para cada tabla, organizamos las jerarquías con los IDs correspondientes, configuramos los \textbf{nameColumn} con identificadores claros y añadimos atributos adicionales que no se incluyan en las jerarquías.
+
+
+
+\begin{itemize}
+	\item \textbf{Paciente:} Configuramos la jerarquía con el ID de paciente, renombrado como \textit{Paciente}, y añadimos atributos como género y etnia. La figura \ref{fig:paciente_dim} muestra esta configuración.
+	\item \textbf{Ingreso:} Configuramos la jerarquía con los IDs de ingreso en UCI y hospital, y añadimos atributos como fuente de admisión, estado de alta, tipo de unidad, altura y peso de admisión, como se muestra en la figura \ref{fig:ingreso_dim}.
+	\item \textbf{Año:} Configuramos el atributo \textbf{nameColumn} para el nombre del año, como se muestra en la figura \ref{fig:anyo_dim}.
+	\item \textbf{Hospital:} Se configura la jerarquía con el ID de región y el ID de hospital, renombrando estos como \textit{Región} y \textit{Hospital}, respectivamente. La región también tendrá su nombre referenciado. Los atributos de esta jerarquía incluirán el número de camas y el nombre de la región. La configuración se muestra en la figura \ref{fig:hospital_dim}.
+	\item \textbf{Medicamento:} Esta dimensión será simple, ya que solo tendrá el ID y el nombre del medicamento, el cual se incluirá en el atributo \textbf{nameColumn}. La figura \ref{fig:medicamento_dim} muestra esta configuración.
+	\item \textbf{Alergia:} La jerarquía se basará en el ID de alergia, renombrado como \textit{Alergia}, y el atributo \textbf{nameColumn} se usará para el nombre de la alergia. Además, se añadirán los atributos tipo de alergia y nombre de medicamento, en caso de que la alergia esté asociada a un medicamento. La configuración se muestra en la figura \ref{fig:alergia_dim}.
+	\item \textbf{Tratamiento:} Se crea una jerarquía con el ID de tratamiento y la descripción del tratamiento, que se incluirá en el atributo \textbf{nameColumn} del ID. La figura \ref{fig:tratamiento_dim} muestra esta configuración.
+\end{itemize}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/paciente_dim.png}
+		\caption{Jerarquías y atributos configurados para la tabla Paciente.}
+		\label{fig:paciente_dim}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/ingreso_dim.png}
+		\caption{Jerarquías configuradas para la tabla Ingreso.}
+		\label{fig:ingreso_dim}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/anyo_dim.png}
+		\caption{Configuración del atributo nameColumn para la tabla Año.}
+		\label{fig:anyo_dim}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/hospital_dim.png}
+		\caption{Jerarquías y atributos configurados para la tabla Hospital.}
+		\label{fig:hospital_dim}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/medicamento_dim.png}
+		\caption{Configuración de la tabla Medicamento con el ID y el nombre del medicamento.}
+		\label{fig:medicamento_dim}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/alergia_dim.png}
+		\caption{Jerarquías y atributos configurados para la tabla Alergia.}
+		\label{fig:alergia_dim}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/tratamiento_dim.png}
+		\caption{Jerarquías configuradas para la tabla Tratamiento.}
+		\label{fig:tratamiento_dim}
+	\end{center}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+\subsection{Procesamiento del Cubo}
+Para procesar el cubo, haz clic derecho sobre él y selecciona la opción \textbf{Procesar}. En la figura \ref{fig:procesado_completo} se muestra el procesamiento del cubo.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.8\textwidth]{images/procesado_completo.png}
+		\caption{Procesamiento inicial del cubo multidimensional.}
+		\label{fig:procesado_completo}
+	\end{center}
+\end{figure}
+
+Para depurar errores, se recomieneda el procesamiento de manera secuencial con transacciones independientes.
+
+\subsection{Conexión al Cubo Procesado}
+Para acceder al cubo procesado, abre SQL Server, crea una conexión a Analysis Services en \textbf{localhost}, y navega hasta \textbf{Databases} para visualizar el cubo y realizar consultas MDX, como se muestra en la figura \ref{fig:conexion_cubo}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{images/conexion_cubo.png}
+		\caption{Visualización del cubo en SQL Server tras la conexión a Analysis Services.}
+		\label{fig:conexion_cubo}
+	\end{center}
+\end{figure}
+
+\subsection{Verificación de Jerarquías}
+Por último, verificamos las jerarquías creadas y navegamos por ellas para asegurarnos de que todo esté correcto, como se muestra en la figura \ref{fig:jerarquia}. 
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[width=0.5\textwidth]{images/navegacion.png}
+		\caption{Verificación de jerarquías en el cubo multidimensional.}
+		\label{fig:jerarquia}
+	\end{center}
+\end{figure}
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	\section{Consultas MDX}
