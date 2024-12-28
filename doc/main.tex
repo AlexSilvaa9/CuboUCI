@@ -399,45 +399,199 @@ Por último, verificamos las jerarquías creadas y navegamos por ellas para aseg
 
 \subsection{Consulta 1}
 
-\textbf{Explicación:}  
-Aquí se describe el propósito y el enfoque de la consulta. Explica qué información se busca obtener y cómo se construye la consulta MDX.
+\textbf{Ranking de Hospitales según Volumen de Fluido}
+\\
 
-\textbf{Resultado:}  
-Incluye una breve descripción de los resultados obtenidos y, si es necesario, una tabla o gráfico para visualizarlos.
+Esta consulta en MDX genera un ranking de hospitales basado en el volumen de fluido, utilizando la base de datos multidimensional \texttt{[UCIDW]}. Primero, define una métrica calculada, \texttt{[Rank Volumen Fluido]}, que asigna un rango a cada hospital según el volumen de fluido (medida \texttt{[Measures].[Volumen Fluido]}) en orden descendente (\texttt{BDESC}). Luego, en la selección (\texttt{SELECT}), construye dos ejes: en las filas (\texttt{ON ROWS}), se muestran los hospitales que tienen un valor no vacío de volumen de fluido, ordenados ascendentemente por el ranking recién calculado (\texttt{BASC}). En las columnas (\texttt{ON COLUMNS}), se incluyen las medidas \texttt{[Volumen Fluido]} y \texttt{[Rank Volumen Fluido]}. 
+\\
+	
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta1,caption=Consulta 1: Ranking de Hospitales según Volumen de Fluido]
+
+WITH 
+	MEMBER [Measures].[Rank Volumen Fluido] AS 
+		RANK([Hospital].[Hospital].CURRENTMEMBER, 
+			ORDER([Hospital].[Hospital].[Hospital].MEMBERS, 
+			[Measures].[Volumen Fluido], BDESC))
+
+SELECT 
+	NON EMPTY 
+		ORDER(
+			FILTER(
+				[Hospital].[Hospital].[Hospital].MEMBERS,
+				NOT ISEMPTY([Measures].[Volumen Fluido])
+			),
+			[Measures].[Rank Volumen Fluido],
+			BASC
+		) ON ROWS, 
+		{[Measures].[Volumen Fluido], [Measures].[Rank Volumen Fluido]} ON COLUMNS
+FROM 
+	[UCIDW]
+\end{lstlisting}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{images/consulta1.png}
+	\caption{Resultados de la consulta 1: Ranking de Hospitales según Volumen de Fluido}
+	\label{fig:consulta1}
+\end{figure}
+
+Como se muestra en la Figura \ref{fig:consulta1}, los resultados de la consulta presentan dos columnas principales: la primera indica el volumen de fluido correspondiente a cada hospital, mientras que la segunda muestra su posición en el ranking. Este ranking ordena los hospitales de manera descendente, desde el que registra el mayor gasto de fluido hasta el que registra el menor.
+
 
 \subsection{Consulta 2}
 
-\textbf{Explicación:}  
-Aquí se describe el propósito y el enfoque de la consulta. Explica qué información se busca obtener y cómo se construye la consulta MDX.
+\textbf{Tres medicamentos más gastados por cada unidad de UCI}
+\\
 
-\textbf{Resultado:}  
-Incluye una breve descripción de los resultados obtenidos y, si es necesario, una tabla o gráfico para visualizarlos.
+Esta consulta en MDX identifica los tres medicamentos más utilizados en cada tipo de unidad de UCI. Primero, se define la métrica calculada \texttt{[Rank Medicamento]}, que asigna un ranking a cada medicamento dentro de su categoría según la cantidad utilizada (\texttt{[Measures].[Cantidad]}) en orden descendente (\texttt{BDESC}). En la selección (\texttt{SELECT}), se configuran dos ejes: en las columnas (\texttt{ON COLUMNS}), se incluye la medida \texttt{[Cantidad]}; y en las filas (\texttt{ON ROWS}), se genera una lista utilizando \texttt{TOPCOUNT} para seleccionar los tres medicamentos con mayor cantidad en cada tipo de unidad de UCI. Para lograr esto, se emplea \texttt{NONEMPTYCROSSJOIN} para cruzar los miembros actuales de las unidades de UCI con los medicamentos disponibles, y \texttt{NONEMPTY} para excluir combinaciones sin datos. 
 
-% Repite el mismo esquema para las consultas restantes
+Además para los medicamentos, se utilizó \texttt{.children} en lugar de \texttt{.MEMBERS} para evitar que apareciera el conjunto completo (\texttt{ALL}) como primera posición del ranking. Sin embargo, si se dejó en en el tipo de UCI para observar cuales son los medicamentos más utilizados en general.
+\\
+
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta2,caption=Consulta 2: Tres medicamentos más gastados por cada unidad de UCI]
+	
+WITH 
+	MEMBER [Measures].[Rank Medicamento] AS 
+	RANK(
+		[Medicamento].[Nombre Medicamento].CURRENTMEMBER,
+		ORDER(
+				[Medicamento].[Nombre Medicamento].children,
+				[Measures].[Cantidad], 
+			BDESC
+			)
+		)
+	SELECT 
+		{[Measures].[Cantidad]} ON COLUMNS, 
+		NONEMPTY(
+			GENERATE(
+				[Ingreso UCI].[Tipo Unidad].members,
+				TOPCOUNT(
+					NONEMPTYCROSSJOIN(
+						{[Ingreso UCI].[Tipo Unidad].CURRENTMEMBER}, 
+						[Medicamento].[Nombre Medicamento].children
+					), 
+					3, 
+					[Measures].[Cantidad]
+				)
+			)
+		) ON ROWS
+	FROM 
+		[UCIDW]
+\end{lstlisting}
+
+En la Figura \ref{fig:consulta2} se presenta el resultado esperado de la consulta. Este muestra dos columnas principales: la primera enumera los tipos de unidades de UCI, mientras que la segunda identifica los medicamentos más utilizados en cada tipo específico de unidad. Además, junto a cada medicamento, se muestra la cantidad correspondiente, lo que permite un análisis detallado de su consumo en cada tipo de UCI.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{images/consulta2.png}
+	\caption{Resultados de la consulta 2: Ranking de Hospitales según Volumen de Fluido}
+	\label{fig:consulta2}
+\end{figure}
+
 
 \subsection{Consulta 3}
 
-\textbf{Explicación:}  
-Aquí se describe el propósito y el enfoque de la consulta. Explica qué información se busca obtener y cómo se construye la consulta MDX.
+\textbf{Cantidad de cada medicamento usado para hombres y para mujeres}
+\\
 
-\textbf{Resultado:}  
-Incluye una breve descripción de los resultados obtenidos y, si es necesario, una tabla o gráfico para visualizarlos.
+Esta consulta en MDX calcula y muestra la cantidad de cada medicamento utilizado, desglosado por género (hombres y mujeres), utilizando nuevamente la base de datos multidimensional \texttt{[UCIDW]}. Define dos medidas calculadas: \texttt{[Cantidad Hombres]} y \texttt{[Cantidad Mujeres]}, que calculan la suma total de la cantidad de medicamentos consumidos por pacientes masculinos (\texttt{[Paciente].[Genero].[Male]}) y femeninos (\texttt{[Paciente].[Genero].[Female]}), respectivamente, utilizando la función \texttt{SUM}. En la cláusula \texttt{SELECT}, se configuran dos ejes: en las filas (\texttt{ON ROWS}), se listan los medicamentos disponibles (\texttt{[Medicamento].[Nombre Medicamento].MEMBERS}); y en las columnas (\texttt{ON COLUMNS}), se muestran las dos medidas calculadas (\texttt{[Cantidad Hombres]} y \texttt{[Cantidad Mujeres]}). 
+\\
+
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta3,caption=Consulta 3: Cantidad de cada medicamento usado para hombres y para mujeres]
+	
+WITH 
+	MEMBER [Measures].[Cantidad Hombres] AS
+		SUM(
+			{[Paciente].[Genero].[Male]}, 
+			[Measures].[Cantidad]
+		)
+	MEMBER [Measures].[Cantidad Mujeres] AS
+		SUM(
+			{[Paciente].[Genero].[Female]}, 
+			[Measures].[Cantidad]
+		)
+SELECT 
+	NON EMPTY 
+		{[Medicamento].[Nombre Medicamento].MEMBERS} ON ROWS,
+		{[Measures].[Cantidad Hombres], [Measures].[Cantidad Mujeres]} ON COLUMNS
+FROM 
+	[UCIDW]
+\end{lstlisting}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/consulta3.png}
+	\caption{Resultados de la consulta 3: Cantidad de cada medicamento usado para hombres y para mujeres}
+	\label{fig:consulta3}
+\end{figure}
+
+Como resultado, obtenemos dos columnas, una correspondiente a los hombres y otra a las mujeres (Figura \ref{fig:consulta3}), que muestran la cantidad de cada medicamento utilizado por cada género.
+
+
 
 \subsection{Consulta 4}
 
-\textbf{Explicación:}  
-Aquí se describe el propósito y el enfoque de la consulta. Explica qué información se busca obtener y cómo se construye la consulta MDX.
+\textbf{Pacientes con Mayor Uso de Medicamentos por Hospital (con mas de 500)}
+\\
 
-\textbf{Resultado:}  
-Incluye una breve descripción de los resultados obtenidos y, si es necesario, una tabla o gráfico para visualizarlos.
+Esta consulta en MDX filtra los registros para mostrar únicamente aquellos en los que la cantidad de medicamento utilizada es superior a 500. En la cláusula \texttt{SELECT}, en las filas (\texttt{ON ROWS}), se combinan las jerarquías \texttt{[Hospital].[Hospital].[Hospital]} y los hijos de \texttt{[Paciente].[Unique PID].CHILDREN}, para evitar que se mostrara el total de pacientes como paciente con mayor uso de medicamentos. La función \texttt{FILTER} se utiliza para filtrar estas combinaciones, mostrando solo aquellas en las que la medida \texttt{[Measures].[Cantidad]} es mayor a 500. En las columnas (\texttt{ON COLUMNS}), se incluye la medida \texttt{[Measures].[Cantidad]}, que muestra la cantidad utilizada para cada combinación. 
+\\
+
+
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta4,caption=Consulta 4: Pacientes con Mayor Uso de Medicamentos por Hospital (con mas de 500)]
+	
+SELECT 
+	NON EMPTY 
+		FILTER(
+			[Hospital].[Hospital].[Hospital] * [Paciente].[Unique PID].CHILDREN,
+			[Measures].[Cantidad] > 500
+		) ON ROWS, 
+		{[Measures].[Cantidad]} ON COLUMNS
+FROM 
+	[UCIDW]
+\end{lstlisting}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{images/consulta4.png}
+	\caption{Resultados de la consulta 4: Pacientes con Mayor Uso de Medicamentos por Hospital (con mas de 500)}
+	\label{fig:consulta4}
+\end{figure}
+
+El resultado es una tabla (Figura \ref{fig:consulta4}) que presenta solo aquellos hospitales y pacientes donde la cantidad de medicamento excede los 500. Se muestran dos columnas de filas, la primera representa los hospitales y la segunda los pacientes.
 
 \subsection{Consulta 5}
 
-\textbf{Explicación:}  
-Aquí se describe el propósito y el enfoque de la consulta. Explica qué información se busca obtener y cómo se construye la consulta MDX.
+\textbf{Tres tratamientos con mayor tasa por fuente de admisión}
 
-\textbf{Resultado:}  
-Incluye una breve descripción de los resultados obtenidos y, si es necesario, una tabla o gráfico para visualizarlos.
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta5,caption=Consulta 5: Tres tratamientos con mayor tasa por fuente de admisión]
+	
+SELECT 
+	{[Measures].[Tasa Infusion]} ON COLUMNS, 
+	NONEMPTY(
+		GENERATE(
+			[Ingreso UCI].[Fuente Admision].children, 
+			TOPCOUNT(
+				NONEMPTYCROSSJOIN(
+					{ [Ingreso UCI].[Fuente Admision].CURRENTMEMBER}, 
+					[Tratamiento].[Descripcion].children
+					), 
+					3, 
+					[Measures].[Tasa Infusion]
+			)
+		)
+	) ON ROWS
+FROM 
+	[UCIDW]
+\end{lstlisting}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{images/consulta5.png}
+	\caption{Resultados de la consulta 5: Tres tratamientos con mayor tasa por fuente de admisión}
+	\label{fig:consulta5}
+\end{figure}
 
 \subsection{Consulta 6}
 

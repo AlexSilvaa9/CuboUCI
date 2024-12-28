@@ -15,16 +15,16 @@
 \contentsline {subsection}{\numberline {3.10}Verificación de Jerarquías}{15}{}%
 \contentsline {section}{\numberline {4}Consultas MDX}{16}{}%
 \contentsline {subsection}{\numberline {4.1}Consulta 1}{16}{}%
-\contentsline {subsection}{\numberline {4.2}Consulta 2}{16}{}%
-\contentsline {subsection}{\numberline {4.3}Consulta 3}{17}{}%
-\contentsline {subsection}{\numberline {4.4}Consulta 4}{17}{}%
-\contentsline {subsection}{\numberline {4.5}Consulta 5}{17}{}%
-\contentsline {subsection}{\numberline {4.6}Consulta 6}{17}{}%
-\contentsline {subsection}{\numberline {4.7}Consulta 7}{17}{}%
-\contentsline {subsection}{\numberline {4.8}Consulta 8}{17}{}%
-\contentsline {subsection}{\numberline {4.9}Consulta 9}{17}{}%
-\contentsline {subsection}{\numberline {4.10}Consulta 10}{18}{}%
-\contentsline {section}{\numberline {5}Tutorial ejecutar consultas}{18}{}%
-\contentsline {section}{\numberline {6}Dificultades Encontradas}{18}{}%
-\contentsline {section}{\numberline {7}Conclusión}{18}{}%
-\contentsline {section}{\numberline {8}Acceso al Repositorio}{19}{}%
+\contentsline {subsection}{\numberline {4.2}Consulta 2}{18}{}%
+\contentsline {subsection}{\numberline {4.3}Consulta 3}{19}{}%
+\contentsline {subsection}{\numberline {4.4}Consulta 4}{20}{}%
+\contentsline {subsection}{\numberline {4.5}Consulta 5}{21}{}%
+\contentsline {subsection}{\numberline {4.6}Consulta 6}{22}{}%
+\contentsline {subsection}{\numberline {4.7}Consulta 7}{22}{}%
+\contentsline {subsection}{\numberline {4.8}Consulta 8}{22}{}%
+\contentsline {subsection}{\numberline {4.9}Consulta 9}{22}{}%
+\contentsline {subsection}{\numberline {4.10}Consulta 10}{23}{}%
+\contentsline {section}{\numberline {5}Tutorial ejecutar consultas}{23}{}%
+\contentsline {section}{\numberline {6}Dificultades Encontradas}{23}{}%
+\contentsline {section}{\numberline {7}Conclusión}{23}{}%
+\contentsline {section}{\numberline {8}Acceso al Repositorio}{24}{}%
