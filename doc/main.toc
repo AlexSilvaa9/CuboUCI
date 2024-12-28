@@ -20,11 +20,11 @@
 \contentsline {subsection}{\numberline {4.4}Consulta 4}{20}{}%
 \contentsline {subsection}{\numberline {4.5}Consulta 5}{21}{}%
 \contentsline {subsection}{\numberline {4.6}Consulta 6}{22}{}%
-\contentsline {subsection}{\numberline {4.7}Consulta 7}{22}{}%
-\contentsline {subsection}{\numberline {4.8}Consulta 8}{22}{}%
-\contentsline {subsection}{\numberline {4.9}Consulta 9}{22}{}%
-\contentsline {subsection}{\numberline {4.10}Consulta 10}{23}{}%
-\contentsline {section}{\numberline {5}Tutorial ejecutar consultas}{23}{}%
-\contentsline {section}{\numberline {6}Dificultades Encontradas}{23}{}%
-\contentsline {section}{\numberline {7}Conclusión}{23}{}%
-\contentsline {section}{\numberline {8}Acceso al Repositorio}{24}{}%
+\contentsline {subsection}{\numberline {4.7}Consulta 7}{23}{}%
+\contentsline {subsection}{\numberline {4.8}Consulta 8}{24}{}%
+\contentsline {subsection}{\numberline {4.9}Consulta 9}{26}{}%
+\contentsline {subsection}{\numberline {4.10}Consulta 10}{26}{}%
+\contentsline {section}{\numberline {5}Tutorial ejecutar consultas}{27}{}%
+\contentsline {section}{\numberline {6}Dificultades Encontradas}{27}{}%
+\contentsline {section}{\numberline {7}Conclusión}{28}{}%
+\contentsline {section}{\numberline {8}Acceso al Repositorio}{29}{}%

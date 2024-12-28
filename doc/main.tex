@@ -564,6 +564,10 @@ El resultado es una tabla (Figura \ref{fig:consulta4}) que presenta solo aquello
 \subsection{Consulta 5}
 
 \textbf{Tres tratamientos con mayor tasa por fuente de admisión}
+\\
+
+ Esta consulta en MDX identifica los tres tratamientos con mayor tasa de infusión por cada fuente de admisión, es decir, por cada motivo de ingreso en la UCI. En la cláusula \texttt{SELECT}, en las columnas (\texttt{ON COLUMNS}), se incluye la medida \texttt{[Measures].[Tasa Infusion]}, que representa la tasa de infusión para los tratamientos. En las filas (\texttt{ON ROWS}), se utiliza la función \texttt{GENERATE} para iterar sobre los hijos de \texttt{[Ingreso UCI].[Fuente Admision].children}, (una vez más eligiendo \texttt{.children} para evitar que en el ranking influya el numero total de fuentes de admisión al igual que haremos con la descripción de los tratamientos) representando las diferentes fuentes de admisión. Para cada fuente de admisión, se aplica \texttt{TOPCOUNT} para seleccionar los tres tratamientos con las mayores tasas de infusión. Esto se logra mediante la función \texttt{NONEMPTYCROSSJOIN}, que combina las fuentes de admisión con los tratamientos disponibles y excluye combinaciones sin datos. 
+\\ 
 
 \begin{lstlisting}[style=ddlstyle, label=lst:consulta5,caption=Consulta 5: Tres tratamientos con mayor tasa por fuente de admisión]
 	
@@ -593,46 +597,187 @@ FROM
 	\label{fig:consulta5}
 \end{figure}
 
+En la Figura \ref{fig:consulta5} se presentan los resultados de la quinta consulta, organizados en dos columnas de datos principales. La primera columna muestra las diferentes fuentes de ingreso a la UCI junto con la descripción de los tratamientos aplicados, mientras que la segunda columna indica la tasa de infusión administrada para cada tratamiento con las tasas más altas. Finalmente, la columna de Tasa Infusión muestra los datos obtenidos de cada tratamiento por tipo de ingreso en UCI.
+
+
 \subsection{Consulta 6}
 
-\textbf{Explicación:}  
-Aquí se describe el propósito y el enfoque de la consulta. Explica qué información se busca obtener y cómo se construye la consulta MDX.
+\textbf{Gasto medio de cantidad y volumen de fluido por numero de camas de hospitales}
+\\
 
-\textbf{Resultado:}  
-Incluye una breve descripción de los resultados obtenidos y, si es necesario, una tabla o gráfico para visualizarlos.
+Esta consulta en MDX calcula el gasto medio de cantidad y volumen de fluido por categorías de número de camas en hospitales. Define dos medidas calculadas: \texttt{[Media Cantidad]} y \texttt{[Media Volumen Fluido]}, que utilizan la función \texttt{AVG} para calcular el promedio de las medidas \texttt{[Cantidad]} y \texttt{[Volumen Fluido]}. El uso de \texttt{EXISTING} es crucial, ya que asegura que los cálculos se limiten a la busqieda de los datos únicamente asociados a ese número de camas en concreto, evitando incluir datos del resto de categorías. En la cláusula \texttt{SELECT}, las medidas calculadas se muestran en las columnas (\texttt{ON COLUMNS}), mientras que las filas (\texttt{ON ROWS}) listan las categorías de número de camas mediante \texttt{[Hospital].[Numero Camas Categoria].CHILDREN}.
+\\
+
+
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta6,caption=Consulta 6: Gasto medio de cantidad y volumen de fluido por numero de camas de hospitales]
+	
+WITH 
+	MEMBER [Measures].[Media Cantidad] AS 
+	AVG(
+		EXISTING [Hospital].[Hospital].[Hospital].MEMBERS, 
+		[Measures].[Cantidad]
+	)
+	MEMBER [Measures].[Media Volumen Fluido] AS 
+	AVG(
+		EXISTING [Hospital].[Hospital].[Hospital].MEMBERS, 
+		[Measures].[Volumen Fluido]
+	)
+SELECT 
+	{[Measures].[Media Cantidad], 
+		[Measures].[Media Volumen
+		Fluido]} ON COLUMNS, 
+		[Hospital].[Numero Camas Categoria].CHILDREN ON ROWS
+FROM 
+	[UCIDW]
+\end{lstlisting}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{images/consulta6.png}
+	\caption{Resultados de la consulta 6: Gasto medio de cantidad y volumen de fluido por numero de camas de hospitales}
+	\label{fig:consulta6}
+\end{figure}
+
+El resultado (Figura \ref{fig:consulta6}) muestra la media tanto de cantidad de gasto de medicamento como de volumen de fluido para cada cantidad de número de camas de los hospitales.
 
 \subsection{Consulta 7}
 
-\textbf{Explicación:}  
-Aquí se describe el propósito y el enfoque de la consulta. Explica qué información se busca obtener y cómo se construye la consulta MDX.
+\textbf{Gasto en medicamentos superior a 1000 por hospital, etnia, y año para pacientes masculinos en la UCI}
+\\
 
-\textbf{Resultado:}  
-Incluye una breve descripción de los resultados obtenidos y, si es necesario, una tabla o gráfico para visualizarlos.
+En este caso, la consulta identifica los gastos en medicamentos superiores a 1000 para pacientes masculinos en la UCI, desglosados por hospital, etnia y año. Se define una medida calculada, \texttt{[Gasto Filtrado]}, que utiliza la función \texttt{IIF} para verificar si el gasto en medicamentos (\texttt{[Measures].[Cantidad]}) supera 1000; si es así, devuelve el valor de la medida, y en caso contrario, devuelve \texttt{NULL}. En la cláusula \texttt{SELECT}, en las filas (\texttt{ON ROWS}), se ordena la combinación de los años (\texttt{[Anyo].[Jerarquía].[Anyo]}), hospitales (\texttt{[Ingreso UCI].[Jerarquía].[Ingreso UCIID]}) y las etnias de los pacientes (\texttt{[Paciente].[Etnia].children}) en orden ascendente. En las columnas (\texttt{ON COLUMNS}), se incluye la medida \texttt{[Gasto Filtrado]}. Además, se aplica un filtro (\texttt{WHERE}) para limitar los resultados a pacientes masculinos (\texttt{[Paciente].[Genero].[Male]}). 
+
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta7,caption=Consulta 7: Gasto en medicamentos superior a 1000 por hospital etnia y año para pacientes masculinos en la UCI]
+	
+WITH 
+	MEMBER [Measures].[Gasto Filtrado] AS 
+	IIF([Measures].[Cantidad] > 1000, [Measures].[Cantidad], NULL)
+
+SELECT 
+	NON EMPTY 
+		ORDER(
+			{[Anyo].[Jerarquia].[Anyo].MEMBERS *
+			[Ingreso UCI].[Jerarquia].[Ingreso UCIID].MEMBERS}*
+			[Paciente].[Etnia].children, 
+			[Anyo].[Anyo].CURRENTMEMBER, 
+		ASC
+		) ON ROWS, 
+		{[Measures].[Gasto Filtrado]} ON COLUMNS
+FROM 
+	[UCIDW]
+WHERE 
+	([Paciente].[Genero].[Male])
+\end{lstlisting}
+
+El resultado es una tabla que detalla, para cada combinación de hospital, etnia y año, los gastos en medicamentos superiores a 1000 para pacientes masculinos en la UCI como se muestra a continuación.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{images/consulta7.png}
+	\caption{Resultados de la consulta 7: Gasto en medicamentos superior a 1000 por hospital, etnia, y año para pacientes masculinos en la UCI}
+	\label{fig:consulta7}
+\end{figure}
+
 
 \subsection{Consulta 8}
 
-\textbf{Explicación:}  
-Aquí se describe el propósito y el enfoque de la consulta. Explica qué información se busca obtener y cómo se construye la consulta MDX.
+\textbf{Volumen de fluido utilizado en el ingreso, clasificado por la altura y peso de los pacientes}
+\\
 
-\textbf{Resultado:}  
-Incluye una breve descripción de los resultados obtenidos y, si es necesario, una tabla o gráfico para visualizarlos.
+La octava consulta calcula el volumen total de fluido utilizado para cada combinación de altura y peso de admisión en las unidades de UCI. Se define la medida calculada \texttt{[Volumen Fluido Utilizado]}, que utiliza la función \texttt{SUM} para sumar el volumen de fluido (\texttt{[Measures].[Volumen Fluido]}) a través de todos los tipos de unidad de UCI (\texttt{[Ingreso UCI].[Tipo Unidad].members}). En la cláusula \texttt{SELECT}, la medida \texttt{[Volumen Fluido Utilizado]} se coloca en las columnas (\texttt{ON COLUMNS}), mientras que las filas (\texttt{ON ROWS}) presentan las combinaciones de valores de altura y peso de admisión (\texttt{[Ingreso UCI].[Altura Admision].children} y \texttt{[Ingreso UCI].[Peso Admision].children}), generadas mediante \texttt{NONEMPTYCROSSJOIN} para excluir las combinaciones sin datos. 
+
+
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta8,caption=Consulta 8: Volumen de fluido utilizado en el ingreso clasificado por la altura y peso de los pacientes]
+	
+WITH 
+	MEMBER [Measures].[Volumen Fluido Utilizado] AS 
+	SUM(
+		[Ingreso UCI].[Tipo Unidad].members, 
+		[Measures].[Volumen Fluido]
+	)
+SELECT 
+	{[Measures].[Volumen Fluido Utilizado]} ON COLUMNS,
+	NONEMPTYCROSSJOIN(
+		[Ingreso UCI].[Altura Admision].children, 
+		[Ingreso UCI].[Peso Admision].children
+	) ON ROWS
+FROM 
+	[UCIDW]
+\end{lstlisting}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{images/consulta8.png}
+	\caption{Resultados de la consulta 8: Volumen de fluido utilizado en el ingreso, clasificado por la altura y peso de los pacientes}
+	\label{fig:consulta8}
+\end{figure}
+
+En la Figura \ref{fig:consulta8} podemos observar el resultado obtenido de la consulta con una columna que muestra el volumen de fluido clasificado en función de la altura (izquierda) y peso (derecha) de cada uno de los pacientes durante su ingreso.
 
 \subsection{Consulta 9}
 
-\textbf{Explicación:}  
-Aquí se describe el propósito y el enfoque de la consulta. Explica qué información se busca obtener y cómo se construye la consulta MDX.
+\textbf{Medicamentos que causan alergias y su gasto total}
+\\
 
-\textbf{Resultado:}  
-Incluye una breve descripción de los resultados obtenidos y, si es necesario, una tabla o gráfico para visualizarlos.
+Esta consulta en MDX identifica los medicamentos que causan alergias y muestra la cantidad utilizada de estos. En la cláusula \texttt{SELECT}, en las columnas (\texttt{ON COLUMNS}), se incluye la medida \texttt{[Measures].[Cantidad]}, que representa el gasto total asociado a cada medicamento. En las filas (\texttt{ON ROWS}), se aplica la función \texttt{FILTER} para seleccionar únicamente aquellos medicamentos (\texttt{[Medicamento].[Nombre Medicamento].children}) que coinciden con los registrados en la dimensión de alergias (\texttt{[Alergia].[Nombre Medicamento].CURRENTMEMBER}). Esto asegura que solo se incluyan los medicamentos asociados con reacciones alérgicas.
+\\
 
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta9,caption=Consulta 9: Medicamentos que causan alergias y su gasto total]
+	
+SELECT 
+	{[Measures].[Cantidad]} ON COLUMNS, 
+	FILTER(
+		[Medicamento].[Nombre Medicamento].children, 
+		[Alergia].[Nombre Medicamento].CURRENTMEMBER 
+	) ON ROWS
+FROM 
+	[UCIDW]
+
+\end{lstlisting}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\linewidth]{images/consulta9.png}
+	\caption{Resultados de la consulta 9: Medicamentos que causan alergias y su gasto total}
+	\label{fig:consulta9}
+\end{figure}
+
+ El resultado observado en la Figura \ref{fig:consulta9} es una tabla que lista únicamente los medicamentos que causan alergias junto la cantidad utilizada de los mismos.
+ 
 \subsection{Consulta 10}
+\textbf{Volumen de fluido de cada medicamento por región en 2014}
+\\
 
-\textbf{Explicación:}  
-Aquí se describe el propósito y el enfoque de la consulta. Explica qué información se busca obtener y cómo se construye la consulta MDX.
+La décima muestra el volumen de fluido utilizado para cada medicamento en cada región concretamente el año 2014. En la cláusula \texttt{SELECT}, en las columnas (\texttt{ON COLUMNS}), se incluye la medida \texttt{[Measures].[Volumen Fluido]}, que representa el volumen total de fluido. En las filas (\texttt{ON ROWS}), se genera una combinación de regiones (\texttt{[Hospital].[Region].MEMBERS}) y medicamentos (\texttt{[Medicamento].[Nombre Medicamento].MEMBERS}) mediante la función \texttt{NONEMPTYCROSSJOIN}, que asegura que solo se incluyan combinaciones con datos disponibles. La cláusula \texttt{WHERE} restringe los resultados al año 2014 (\texttt{[Anyo].[Jerarquía].[Anyo].[2014]}).
 
-\textbf{Resultado:}  
-Incluye una breve descripción de los resultados obtenidos y, si es necesario, una tabla o gráfico para visualizarlos.
 
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta10,caption=Consulta 10: Volumen de fluido de cada medicamento por region en 2014]
+	
+SELECT 
+	{[Measures].[Volumen Fluido]} ON COLUMNS, 
+	NONEMPTYCROSSJOIN(
+		[Hospital].[Region].MEMBERS, 
+		[Medicamento].[Nombre Medicamento].MEMBERS
+	) ON ROWS
+FROM 
+	[UCIDW]
+WHERE 
+	([Anyo].[Jerarquia].[Anyo].[2014])
+
+	
+\end{lstlisting}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{images/consulta10.png}
+	\caption{Resultados de la consulta 10: Volumen de fluido de cada medicamento por región en 2014}
+	\label{fig:consulta10}
+\end{figure}
+
+Como resultado obtenemos la tabla de la figura \ref{fig:consulta10} donde se muestran los resultados de volumen de fluido clasificado por región de cada medicamento
 
 \section{Tutorial ejecutar consultas}
 
