@@ -4,7 +4,7 @@
 --1 Ranking de Hospitales según Volumen de Fluido
 
 WITH 
-    MEMBER [Measures].[Rank Volumen Fluido] AS 
+    MEMBER [Measures].[Rank Hospitales] AS 
         RANK([Hospital].[Hospital].CURRENTMEMBER, 
              ORDER([Hospital].[Hospital].[Hospital].MEMBERS, 
                    [Measures].[Volumen Fluido], BDESC))
@@ -16,10 +16,10 @@ SELECT
             [Hospital].[Hospital].[Hospital].MEMBERS,
             NOT ISEMPTY([Measures].[Volumen Fluido])
         ),
-        [Measures].[Rank Volumen Fluido],
+        [Measures].[Rank Hospitales],
         BASC
     ) ON ROWS, 
-    {[Measures].[Volumen Fluido], [Measures].[Rank Volumen Fluido]} ON COLUMNS
+    {[Measures].[Volumen Fluido], [Measures].[Rank Hospitales]} ON COLUMNS
 FROM 
     [UCIDW]
 
@@ -89,25 +89,20 @@ FROM
     [UCIDW]
 
 
--- 5 Mostrar los tres tratamientos con mayor tasa por fuente de admisión
+-- 5 Volumen de fluido por tipo de UCI y Tratamiento aplicado
 SELECT 
-    {[Measures].[Tasa Infusion]} ON COLUMNS, 
+    [Ingreso UCI].[Tipo Unidad].children ON COLUMNS, 
     NONEMPTY(
-        GENERATE(
-            [Ingreso UCI].[Fuente Admision].children, 
-            TOPCOUNT(
-                NONEMPTYCROSSJOIN(
-                    { [Ingreso UCI].[Fuente Admision].CURRENTMEMBER}, 
-                    [Tratamiento].[Descripcion].children
-                ), 
-                3, 
-                [Measures].[Tasa Infusion]
-            )
+        TOPCOUNT(
+            [Tratamiento].[Descripcion].children, 
+            3, 
+            [Measures].[Volumen Fluido]
         )
     ) ON ROWS
 FROM 
     [UCIDW]
-
+WHERE 
+    [Measures].[Volumen Fluido]
 
 
 -- 6 Gasto medio de cantidad y volumen de fluido por numero de camas de hospitales
