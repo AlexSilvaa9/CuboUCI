@@ -25,5 +25,6 @@
 \contentsline {subsection}{\numberline {4.9}Consulta 9}{26}{}%
 \contentsline {subsection}{\numberline {4.10}Consulta 10}{26}{}%
 \contentsline {section}{\numberline {5}Tutorial ejecutar consultas}{27}{}%
-\contentsline {section}{\numberline {6}Conclusión}{29}{}%
-\contentsline {section}{\numberline {7}Acceso al Repositorio}{30}{}%
+\contentsline {section}{\numberline {6}Dificultades Encontradas}{29}{}%
+\contentsline {section}{\numberline {7}Conclusión}{29}{}%
+\contentsline {section}{\numberline {8}Acceso al Repositorio}{30}{}%

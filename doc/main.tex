@@ -89,7 +89,7 @@
 
 En el contexto hospitalario actual, el análisis avanzado de datos se ha convertido en una herramienta indispensable para optimizar la toma de decisiones y mejorar la gestión de recursos en áreas críticas como las Unidades de Cuidados Intensivos (UCI). El análisis detallado del gasto en medicamentos, que representa una proporción significativa de los costos operativos, requiere técnicas especializadas que permitan explorar grandes volúmenes de datos desde múltiples perspectivas.\\
 
-Tras la construcción de un almacén de datos orientado al análisis del gasto en medicamentos, el siguiente paso lógico es implementar estructuras que soporten consultas analíticas avanzadas. Los cubos multidimensionales permiten una visión integral de los datos, facilitando la identificación de patrones, tendencias y áreas críticas de gasto. Además, el uso de consultas MDX (Multidimensional Expressions) habilita a los usuarios para realizar análisis dinámicos y obtener insights clave de manera rápida y eficiente. Este trabajo se centra en la creación y explotación de un cubo multidimensional diseñado específicamente para analizar el gasto en medicamentos en pacientes ingresados en UCI en hospitales de EE.UU.
+Tras la construcción de un almacén de datos orientado al análisis del gasto en medicamentos, el siguiente paso lógico es implementar estructuras que soporten consultas analíticas avanzadas. Los cubos multidimensionales permiten una visión integral de los datos, facilitando la identificación de patrones, tendencias y áreas críticas de gasto. Además, el uso de consultas MDX (Multidimensional Expressions) habilita a los usuarios para realizar análisis dinámicos y obtener insights clave de manera rápida y eficiente. Este trabajo se centra en la creación y explotación de un cubo multidimensional diseñado específicamente para analizar el gasto en medicamentos en pacientes ingresados en UCI en hospitales de EE.UU. \cite{eicu_crd}
 
 \section{Objetivos}
 \label{sec:objetivos}
@@ -811,15 +811,20 @@ Como resultado obtenemos la tabla de la figura \ref{fig:consulta10} donde se mue
 	  	\label{fig:resultado}
 	  \end{figure}
 	 
+	 \section{Dificultades Encontradas}
+	 A lo largo de este proyecto, hemos enfrentado una serie de dificultades que, aunque han retrasado nuestro progreso, han resultado ser valiosas oportunidades de aprendizaje. 
 	 
-
-	\section{Conclusión}
-	\label{sec:conclusion}
-	
-	Gracias a la correcta implementación del proceso ETL, se ha logrado organizar el almacén de datos de manera eficiente, optimizando la consulta de información relevante para la toma de decisiones. Este proceso ha permitido integrar y transformar datos provenientes de \cite{eicu_crd}. Además, la estructura obtenida no solo asegura la calidad y consistencia de los datos, sino que también sienta las bases para futuras ampliaciones o análisis más complejos, promoviendo la escalabilidad y adaptabilidad del sistema.
-	
-	En conclusión, este proyecto ETL aporta un modelo sólido y adaptable para la gestión y análisis de datos en el ámbito hospitalario, contribuyendo a una administración más eficiente de los recursos y a una mejora potencial en la atención a los pacientes.
-	
+	 En la creación y procesamiento del cubo multidimensional de gasto de medicamento, uno de los principales desafíos ha sido la implementación de dimensiones con relaciones de varios a varios con el hecho, debido a la escasa documentación disponible sobre este tema. Esto nos obligó a investigar en profundidad y experimentar diferentes enfoques hasta encontrar una solución adecuada.
+	 
+	 Otra dificultad significativa surgió con el diseño inicial del cubo, que se demostró mejorable. Logramos formular consultas que aportan valor y sentido al almacén de gasto de medicamentos. 
+	 
+	 \section{Conclusión}
+	 \label{sec:conclusion}
+	 
+	 La creación del cubo multidimensional de gasto de medicamento ha representado un paso clave en nuestro trabajo, construyendo sobre la base sólida establecida por el proceso ETL previo. Este proyecto no solo ha permitido estructurar los datos de manera más intuitiva y accesible, sino que también ha facilitado un análisis más profundo y específico del gasto farmacéutico.
+	 
+	 En conclusión, el cubo multidimensional desarrollado no solo ofrece una herramienta potente para el análisis del gasto de medicamentos, sino que también representa un avance importante en la construcción de infraestructuras de datos hospitalarios más robustas y orientadas al análisis avanzado.
+	 
 	\newpage
 	\section{Acceso al Repositorio}
 	
