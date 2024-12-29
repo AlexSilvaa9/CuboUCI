@@ -407,11 +407,12 @@ Esta consulta en MDX genera un ranking de hospitales basado en el volumen de flu
 	
 \begin{lstlisting}[style=ddlstyle, label=lst:consulta1,caption=Consulta 1: Ranking de Hospitales según Volumen de Fluido]
 
+
 WITH 
-	MEMBER [Measures].[Rank Volumen Fluido] AS 
-		RANK([Hospital].[Hospital].CURRENTMEMBER, 
-			ORDER([Hospital].[Hospital].[Hospital].MEMBERS, 
-			[Measures].[Volumen Fluido], BDESC))
+	MEMBER [Measures].[Rank Hospitales] AS 
+	RANK([Hospital].[Hospital].CURRENTMEMBER, 
+	ORDER([Hospital].[Hospital].[Hospital].MEMBERS, 
+	[Measures].[Volumen Fluido], BDESC))
 
 SELECT 
 	NON EMPTY 
@@ -420,17 +421,17 @@ SELECT
 				[Hospital].[Hospital].[Hospital].MEMBERS,
 				NOT ISEMPTY([Measures].[Volumen Fluido])
 			),
-			[Measures].[Rank Volumen Fluido],
+			[Measures].[Rank Hospitales],
 			BASC
 		) ON ROWS, 
-		{[Measures].[Volumen Fluido], [Measures].[Rank Volumen Fluido]} ON COLUMNS
+	{[Measures].[Volumen Fluido], [Measures].[Rank Hospitales]} ON COLUMNS
 FROM 
 	[UCIDW]
 \end{lstlisting}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\linewidth]{images/consulta1.png}
+	\includegraphics[width=0.35\linewidth]{images/consulta1.png}
 	\caption{Resultados de la consulta 1: Ranking de Hospitales según Volumen de Fluido}
 	\label{fig:consulta1}
 \end{figure}
@@ -485,7 +486,7 @@ En la Figura \ref{fig:consulta2} se presenta el resultado esperado de la consult
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\linewidth]{images/consulta2.png}
-	\caption{Resultados de la consulta 2: Ranking de Hospitales según Volumen de Fluido}
+	\caption{Resultados de la consulta 2: Tres medicamentos más gastados por cada unidad de UCI}
 	\label{fig:consulta2}
 \end{figure}
 
@@ -563,41 +564,37 @@ El resultado es una tabla (Figura \ref{fig:consulta4}) que presenta solo aquello
 
 \subsection{Consulta 5}
 
-\textbf{Tres tratamientos con mayor tasa por fuente de admisión}
+\textbf{Volumen de fluido por tipo de UCI y tratamiento aplicado}
 \\
 
- Esta consulta en MDX identifica los tres tratamientos con mayor tasa de infusión por cada fuente de admisión, es decir, por cada motivo de ingreso en la UCI. En la cláusula \texttt{SELECT}, en las columnas (\texttt{ON COLUMNS}), se incluye la medida \texttt{[Measures].[Tasa Infusion]}, que representa la tasa de infusión para los tratamientos. En las filas (\texttt{ON ROWS}), se utiliza la función \texttt{GENERATE} para iterar sobre los hijos de \texttt{[Ingreso UCI].[Fuente Admision].children}, (una vez más eligiendo \texttt{.children} para evitar que en el ranking influya el numero total de fuentes de admisión al igual que haremos con la descripción de los tratamientos) representando las diferentes fuentes de admisión. Para cada fuente de admisión, se aplica \texttt{TOPCOUNT} para seleccionar los tres tratamientos con las mayores tasas de infusión. Esto se logra mediante la función \texttt{NONEMPTYCROSSJOIN}, que combina las fuentes de admisión con los tratamientos disponibles y excluye combinaciones sin datos. 
+Esta consulta en MDX muestra los tres tratamientos con los mayores volúmenes de fluido administrados para cada unidad de la UCI. En las columnas (\texttt{ON COLUMNS}), se seleccionan los hijos de \texttt{[Ingreso UCI].[Tipo Unidad].children}, que representan las distintas unidades de la UCI. En las filas (\texttt{ON ROWS}), se utiliza \texttt{TOPCOUNT} para identificar los tres tratamientos principales, basándose en los valores de la medida \texttt{[Measures].[Volumen Fluido]}. Para excluir combinaciones sin datos, se emplea la función \texttt{NONEMPTY}, que filtra únicamente las combinaciones relevantes. La consulta analiza el cubo \texttt{[UCIDW]} con la medida \texttt{[Measures].[Volumen Fluido]} como contexto en la cláusula \texttt{WHERE}, asegurando que todos los cálculos se centren en el volumen de fluido administrado.
 \\ 
 
-\begin{lstlisting}[style=ddlstyle, label=lst:consulta5,caption=Consulta 5: Tres tratamientos con mayor tasa por fuente de admisión]
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta5,caption=Consulta 5: Volumen de fluido por tipo de UCI y tratamiento aplicado]
 	
 SELECT 
-	{[Measures].[Tasa Infusion]} ON COLUMNS, 
+	[Ingreso UCI].[Tipo Unidad].children ON COLUMNS, 
 	NONEMPTY(
-		GENERATE(
-			[Ingreso UCI].[Fuente Admision].children, 
-			TOPCOUNT(
-				NONEMPTYCROSSJOIN(
-					{ [Ingreso UCI].[Fuente Admision].CURRENTMEMBER}, 
-					[Tratamiento].[Descripcion].children
-					), 
-					3, 
-					[Measures].[Tasa Infusion]
-			)
+		TOPCOUNT(
+			[Tratamiento].[Descripcion].children, 
+			3, 
+			[Measures].[Volumen Fluido]
 		)
 	) ON ROWS
 FROM 
 	[UCIDW]
+WHERE 
+	[Measures].[Volumen Fluido]
 \end{lstlisting}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{images/consulta5.png}
-	\caption{Resultados de la consulta 5: Tres tratamientos con mayor tasa por fuente de admisión}
+	\includegraphics[width=0.9\linewidth]{images/consulta5.png}
+	\caption{Resultados de la consulta 5: Volumen de fluido por tipo de UCI y tratamiento aplicado}
 	\label{fig:consulta5}
 \end{figure}
 
-En la Figura \ref{fig:consulta5} se presentan los resultados de la quinta consulta, organizados en dos columnas de datos principales. La primera columna muestra las diferentes fuentes de ingreso a la UCI junto con la descripción de los tratamientos aplicados, mientras que la segunda columna indica la tasa de infusión administrada para cada tratamiento con las tasas más altas. Finalmente, la columna de Tasa Infusión muestra los datos obtenidos de cada tratamiento por tipo de ingreso en UCI.
+En la Figura \ref{fig:consulta5} se presentan los resultados de la quinta consulta, organizados en dos secciones principales. La primera sección muestra las diferentes unidades de la UCI representadas en las columnas, mientras que las filas presentan los tres tratamientos con los mayores volúmenes de fluido administrados, seleccionados para cada unidad. Para cada combinación de tratamiento y unidad, se indica el volumen de fluido correspondiente, destacando los tratamientos más relevantes en función de la medida \texttt{[Volumen Fluido]}. De este modo, los resultados permiten identificar los tratamientos más utilizados en cada unidad de la UCI según el volumen de infusión administrado.
 
 
 \subsection{Consulta 6}
