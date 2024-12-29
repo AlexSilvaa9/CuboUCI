@@ -564,13 +564,13 @@ El resultado es una tabla (Figura \ref{fig:consulta4}) que presenta solo aquello
 
 \subsection{Consulta 5}
 
-\textbf{Volumen de fluido por tipo de UCI y tratamiento aplicado}
+\textbf{Tres tratamientos con mayor volumen de fluido administrado y que cantidad se administra para cada tipo de UCI}
 \\
 
-Esta consulta en MDX muestra los tres tratamientos con los mayores volúmenes de fluido administrados para cada unidad de la UCI. En las columnas (\texttt{ON COLUMNS}), se seleccionan los hijos de \texttt{[Ingreso UCI].[Tipo Unidad].children}, que representan las distintas unidades de la UCI. En las filas (\texttt{ON ROWS}), se utiliza \texttt{TOPCOUNT} para identificar los tres tratamientos principales, basándose en los valores de la medida \texttt{[Measures].[Volumen Fluido]}. Para excluir combinaciones sin datos, se emplea la función \texttt{NONEMPTY}, que filtra únicamente las combinaciones relevantes. La consulta analiza el cubo \texttt{[UCIDW]} con la medida \texttt{[Measures].[Volumen Fluido]} como contexto en la cláusula \texttt{WHERE}, asegurando que todos los cálculos se centren en el volumen de fluido administrado.
+Esta consulta en MDX muestra los tres tratamientos con los mayores volúmenes de fluido administrados y que cantidad de los mismos de administra en cada unidad de la UCI. En las columnas (\texttt{ON COLUMNS}), se seleccionan los hijos de \texttt{[Ingreso UCI].[Tipo Unidad].children}, que representan las distintas unidades de la UCI. En las filas (\texttt{ON ROWS}), se utiliza \texttt{TOPCOUNT} para identificar los tres tratamientos principales, basándose en los valores de la medida \texttt{[Measures].[Volumen Fluido]}. Para excluir combinaciones sin datos, se emplea la función \texttt{NONEMPTY}, que filtra únicamente las combinaciones relevantes. La consulta analiza el cubo \texttt{[UCIDW]} con la medida \texttt{[Measures].[Volumen Fluido]} como contexto en la cláusula \texttt{WHERE}, asegurando que todos los cálculos se centren en el volumen de fluido administrado.
 \\ 
 
-\begin{lstlisting}[style=ddlstyle, label=lst:consulta5,caption=Consulta 5: Volumen de fluido por tipo de UCI y tratamiento aplicado]
+\begin{lstlisting}[style=ddlstyle, label=lst:consulta5,caption=Consulta 5: Tres tratamientos con mayor volumen de fluido administrado y que cantidad se administra para cada tipo de UCI]
 	
 SELECT 
 	[Ingreso UCI].[Tipo Unidad].children ON COLUMNS, 
@@ -590,11 +590,11 @@ WHERE
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\linewidth]{images/consulta5.png}
-	\caption{Resultados de la consulta 5: Volumen de fluido por tipo de UCI y tratamiento aplicado}
+	\caption{Resultados de la consulta 5: Tres tratamientos con mayor volumen de fluido administrado y que cantidad se administra para cada tipo de UCI}
 	\label{fig:consulta5}
 \end{figure}
 
-En la Figura \ref{fig:consulta5} se presentan los resultados de la quinta consulta, organizados en dos secciones principales. La primera sección muestra las diferentes unidades de la UCI representadas en las columnas, mientras que las filas presentan los tres tratamientos con los mayores volúmenes de fluido administrados, seleccionados para cada unidad. Para cada combinación de tratamiento y unidad, se indica el volumen de fluido correspondiente, destacando los tratamientos más relevantes en función de la medida \texttt{[Volumen Fluido]}. De este modo, los resultados permiten identificar los tratamientos más utilizados en cada unidad de la UCI según el volumen de infusión administrado.
+En la Figura \ref{fig:consulta5} se presentan los resultados de la quinta consulta, organizados en dos secciones principales. La primera sección muestra las diferentes unidades de la UCI representadas en las columnas, mientras que las filas presentan los tres tratamientos con los mayores volúmenes de fluido administrados. Para cada combinación de tratamiento y unidad, se indica el volumen de fluido correspondiente de esos tres tratamientos para cada unidad. De este modo, los resultados permiten identificar el uso de los tres tratamientos principales por unidad de la UCI según el volumen de infusión administrado.
 
 
 \subsection{Consulta 6}
